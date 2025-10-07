@@ -4,7 +4,7 @@ import { movieImageLink } from "../utils/constant";
 const MovieMeta = ({ movie }) => {
   console.log(movie);
   return (
-    <div className="mb-80 mx-5 h-[60rem] md:h-[45rem]">
+    <div className="mb-80 mx-5 h-[50%] md:h-[45rem]">
       <div className="h-[70%] flex gap-5 md:flex-row flex-col">
         <div className="w-[350px] h-[500px]">
           <img
@@ -16,10 +16,10 @@ const MovieMeta = ({ movie }) => {
         <div className="flex flex-col justify-between">
           <div>
             <h1 className="text-6xl font-bold mb-6">{movie?.title}</h1>
-            <button className="rounded-xl bg-black text-white px-4 py-2 border border-black mr-3 cursor-pointer">
+            <button className="rounded-lg bg-black text-white px-4 py-2 border border-black mr-3 cursor-pointer hover:bg-[#373737] transition-all ease duration-500">
               Add to Watchlist
             </button>
-            <button className="rounded-xl px-4 py-2 border border-black cursor-pointer">
+            <button className="rounded-lg px-4 py-2 border border-black cursor-pointer hover:bg-black hover:text-white transition-all ease duration-500">
               Already Watched
             </button>
           </div>

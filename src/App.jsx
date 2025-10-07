@@ -1,0 +1,34 @@
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import About from "./pages/About";
+import { createBrowserRouter, Outlet } from "react-router";
+import { Provider } from "react-redux";
+import store from "./store/store";
+// import MovieDetail from "./pages/MovieDetail";
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Header />
+      <Outlet />
+    </Provider>
+  );
+};
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <Home /> },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/movie/:id",
+        // element: <MovieDetail />,
+      },
+    ],
+  },
+]);
