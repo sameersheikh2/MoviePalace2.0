@@ -4,7 +4,7 @@ import About from "./pages/About";
 import { createBrowserRouter, Outlet } from "react-router";
 import { Provider } from "react-redux";
 import store from "./store/store";
-// import MovieDetail from "./pages/MovieDetail";
+import MovieDetail from "./pages/MovieDetail";
 
 const App = () => {
   return (
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/movie/:id",
-        // element: <MovieDetail />,
+        element: <MovieDetail />,
       },
     ],
   },

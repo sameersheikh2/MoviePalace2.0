@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  movieDetailLink,
   movieLinkNowPlaying,
   movieLinkPopular,
   movieLinkTopRated,
   options,
 } from "../../utils/constant";
 
-const createMovieFetcher = (name, url) => {
+const createMovieFetcher = (name, url, id) => {
   return createAsyncThunk(`movies/${name}`, async () => {
-    const response = await fetch(url, options);
+    const response = await fetch(url + id, options);
     if (!response.ok) {
       throw new Error(`Failed to fetch ${name}`);
     }
@@ -30,6 +31,11 @@ export const fetchTopRated = createMovieFetcher(
   movieLinkTopRated
 );
 
+// export const fetchMovieDetails = createMovieFetcher(
+//   "fetchMovieDetails",
+//   movieDetailLink
+// );
+
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
@@ -37,6 +43,7 @@ const moviesSlice = createSlice({
     popularMovies: [],
     topRatedMovies: [],
     searchResults: [],
+    movieDetails: {},
     filters: {},
     loading: false,
     error: null,
@@ -44,6 +51,9 @@ const moviesSlice = createSlice({
   reducers: {
     filterMovies: (state, action) => {
       state.filters = action.payload;
+    },
+    setMovieDetails(state, action) {
+      state.movieDetails = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -80,7 +90,29 @@ const moviesSlice = createSlice({
         state.topRatedMovies = action.payload;
       })
       .addCase(fetchTopRated.rejected, handleRejected);
+    // .addCase(fetchMovieDetails.pending, handlePending)
+    // .addCase(fetchMovieDetails.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.movieDetails = action.payload;
+    // })
+    // .addCase(fetchMovieDetails.rejected, handleRejected);
   },
 });
 
+export const fetchMovieDetail = (movieId) => async (dispatch) => {
+  try {
+    const res = await fetch(
+      movieDetailLink +
+        movieId +
+        "?append_to_response=videos%2Cimages%2Ccredits%2Csimilar",
+      options
+    );
+    const data = await res.json();
+    dispatch(setMovieDetails(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const { setMovieDetails } = moviesSlice.actions;
 export default moviesSlice.reducer;

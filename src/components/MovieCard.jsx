@@ -11,7 +11,7 @@ const MovieCard = ({ movieData }) => {
   };
   return (
     <Link to={`/movie/${movieData.id}`}>
-      <div className="w-80 h-[33rem] shadow-md cursor-pointer hover:scale-[102%] transition-all ease-in-out duration-300">
+      <div className="w-80 h-[35rem] shadow-md cursor-pointer hover:scale-[102%] transition-all ease-in-out duration-300">
         <div className="w-[300px] h-[425px] m-auto rounded-sm">
           <img
             className="bg-cover w-full h-full rounded-sm"

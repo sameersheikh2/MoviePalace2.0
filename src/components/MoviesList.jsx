@@ -16,12 +16,16 @@ function MoviesList() {
     // dispatch(fetchTopRated());
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center h-screen items-center">
+        <span className="loading loading-spinner loading-xl"></span>
+      </div>
+    );
   if (error) return <div>Error!</div>;
 
   return (
-    <div className="slider-container px-20">
-      <h2 className="text-xl ">Now Playing</h2>
+    <div className="flex justify-center flex-wrap gap-10 px-20">
       {nowPlayingMovies.map((movie) => (
         <MovieCard key={movie.id} movieData={movie} />
       ))}

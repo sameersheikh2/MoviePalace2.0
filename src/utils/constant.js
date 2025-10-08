@@ -22,3 +22,5 @@ export const searchMovieLink =
   "https://api.themoviedb.org/3/search/movie?query=";
 
 export const movieDetailLink = "https://api.themoviedb.org/3/movie/";
+
+export const castImageLink = "https://image.tmdb.org/t/p/original/";
