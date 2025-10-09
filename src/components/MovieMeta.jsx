@@ -2,81 +2,91 @@ import { movieImageLink } from "../utils/constant";
 import Cast from "./Cast";
 
 const MovieMeta = ({ movie }) => {
-  if (!movie) {
+  console.log(movie);
+  if (!movie || movie === null) {
     return (
-      <div className="flex justify-center h-screen items-center">
+      <div className="flex justify-center items-center min-h-screen">
         <progress className="progress w-56"></progress>
       </div>
     );
   }
 
-  const posterUrl = movie?.poster_path
+  const posterUrl = movie.poster_path
     ? movieImageLink + movie.poster_path
     : null;
 
-  const trailer = movie?.videos?.results?.find(
-    (video) => video.type === "Trailer"
-  );
+  const trailer = movie.videos?.results?.find((vid) => vid.type === "Trailer");
   const trailerUrl = trailer?.key
     ? `https://www.youtube.com/embed/${trailer.key}`
     : null;
 
   return (
-    <div className="mb-80 mx-20 ">
-      <div className="h-[70%] flex gap-5 md:flex-row flex-col">
-        <div className="w-[350px] h-[500px]">
+    <div className="px-4 sm:px-8 md:px-20 py-8">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="w-full sm:w-80 md:w-96 aspect-[2/3] flex-shrink-0">
           {posterUrl ? (
             <img
-              className="w-full h-full bg-cover rounded-xl lazyload"
               src={posterUrl}
               alt={movie.title || "Movie Poster"}
+              className="w-full h-full object-cover rounded-xl"
             />
           ) : (
-            <div className="skeleton w-[400px] bg-gray-400 h-[500px]" />
+            <div className="w-full h-full bg-gray-300 skeleton rounded-xl" />
           )}
         </div>
 
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between flex-1">
           <div>
-            <h1 className="text-6xl font-bold mb-6">{movie.title}</h1>
-            <button className="rounded-lg bg-black text-white px-4 py-2 border border-black mr-3 cursor-pointer hover:bg-[#373737] transition-all ease duration-500">
-              Add to Watchlist
-            </button>
-            <button className="rounded-lg px-4 py-2 border border-black cursor-pointer hover:bg-black hover:text-white transition-all ease duration-500">
-              Already Watched
-            </button>
+            {movie.title ? (
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                {movie.title}
+              </h1>
+            ) : (
+              <div className="skeleton h-20 bg-gray-200 w-48 rounded-3xl mb-10"></div>
+            )}
+            <div className="space-x-2 mb-4 ">
+              <button
+                className={`rounded-lg bg-black text-white px-4 py-2 border border-black hover:bg-white hover:text-black  cursor-pointer duration-300 ease-in-out transform transition-all`}
+              >
+                Add to Watchlist
+              </button>
+              <button className="rounded-lg px-4 py-2 border border-black hover:bg-black hover:text-white  cursor-pointer duration-300 ease-in-out transform transition-all">
+                Already Watched
+              </button>
+            </div>
           </div>
 
           {trailerUrl && (
-            <div className="rounded-xl overflow-hidden">
+            <div className="mt-4 w-full md:w-[550px] aspect-video overflow-hidden rounded-xl">
               <iframe
                 loading="lazy"
-                className="w-[300px] sm:w-[550px] sm:h-[350px] h-[200px] rounded-xl"
+                className="w-full h-full"
                 src={trailerUrl}
                 title="Trailer"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              ></iframe>
+              />
             </div>
           )}
         </div>
       </div>
 
-      <div className="my-16">
-        {movie?.genres && (
-          <div className="flex gap-2 mb-4">
-            Genres:
-            {movie?.genres.map(({ name }, index) => (
-              <p key={index}>{name}, </p>
+      <div className="mt-8">
+        {movie.genres && movie.genres.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            <span className="font-semibold">Genres:</span>
+            {movie.genres.map((g, idx) => (
+              <span key={idx}>{g.name}</span>
             ))}
           </div>
         )}
-        <h2 className="text-3xl font-bold my-5 mt-10">Synopsis</h2>
-        <p className="text-md">{movie.overview}</p>
+        <h2 className="text-2xl font-bold mt-6 mb-2">Synopsis</h2>
+        <p className="text-base sm:text-lg">{movie.overview}</p>
       </div>
-      <div className="">
-        <h2 className="text-4xl font-bold text-center">Cast</h2>
-        <Cast castInfo={movie?.credits?.cast} />
+
+      <div className="mt-12">
+        <h2 className="text-3xl font-bold text-center mb-6">Cast</h2>
+        <Cast castInfo={movie.credits?.cast} />
       </div>
     </div>
   );
