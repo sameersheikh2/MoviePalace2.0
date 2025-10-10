@@ -26,7 +26,7 @@ const Cast = ({ castInfo }) => {
               <h2 className="card-title">{cast.name}</h2>
               <p>as {cast.character}</p>
               <div className="card-actions justify-center">
-                <Link>
+                <Link to={`/cast/${cast?.id}`}>
                   <button className="btn border-2 hover:bg-green-700 bg-green-800 ">
                     More Info
                   </button>

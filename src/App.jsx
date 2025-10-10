@@ -5,6 +5,7 @@ import { createBrowserRouter, Outlet } from "react-router";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import MovieDetail from "./pages/MovieDetail";
+import CastDetail from "./components/CastDetail";
 
 const App = () => {
   return (
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/movie/:id",
         element: <MovieDetail />,
+      },
+      {
+        path: "/cast/:castId",
+        element: <CastDetail />,
       },
     ],
   },
