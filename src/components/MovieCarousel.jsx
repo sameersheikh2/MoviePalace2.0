@@ -10,12 +10,14 @@ const MovieCarousel = ({ title, movies }) => {
   return (
     <div className="mb-16 w-full">
       <div className="flex justify-between mx-2 items-center mb-4">
-        <h2 className="text-4xl font-bold">{title}</h2>
-        <button className="btn btn-sm btn-outline btn-neutral ">
+        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
+          {title}
+        </h2>
+        <button className="btn btn-sm btn-outline border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white">
           View All
         </button>
       </div>
-      <div className="divider bg-black h-[1px]"></div>
+      <div className="divider bg-gray-300 dark:bg-gray-600 h-[1px]"></div>
       <Swiper
         navigation={true}
         modules={[Navigation]}

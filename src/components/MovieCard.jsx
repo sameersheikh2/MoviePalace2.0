@@ -11,7 +11,7 @@ const MovieCard = ({ movieData }) => {
   };
   return (
     <Link to={`/movie/${movieData.id}`}>
-      <div className="w-80 h-[35rem] shadow-md cursor-pointer hover:scale-[102%] transition-all ease-in-out duration-300">
+      <div className="w-80 h-[35rem] shadow-md cursor-pointer hover:scale-[102%] transition-all ease-in-out duration-300 bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
         <div className="w-[300px] h-[425px] m-auto rounded-sm">
           <img
             className="bg-cover w-full h-full rounded-sm"
@@ -19,9 +19,11 @@ const MovieCard = ({ movieData }) => {
             alt=""
           />
         </div>
-        <div className="mx-3 mt-4  text-center">
-          <h2 className="text-2xl font-semibold">{movieData?.title}</h2>
-          <p className="text-sm">
+        <div className="mx-3 mt-4 text-center">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            {movieData?.title}
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             {movieData && formatOverview(movieData?.overview)}
           </p>
         </div>

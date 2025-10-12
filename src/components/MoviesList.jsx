@@ -7,6 +7,7 @@ import {
 } from "../store/slices/moviesSlice";
 
 import MovieCarousel from "./MovieCarousel";
+import NowPlayingCarousel from "./NowPlayingCarousel";
 
 function MoviesList() {
   const { nowPlayingMovies, popularMovies, topRatedMovies, loading, error } =
@@ -29,8 +30,8 @@ function MoviesList() {
   if (error) return <div>Error!</div>;
 
   return (
-    <div className="px-20">
-      <MovieCarousel title="Now Playing" movies={nowPlayingMovies} />
+    <div className="pt-24 px-20 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
+      <NowPlayingCarousel movies={nowPlayingMovies} />
       <MovieCarousel title="Popular Movies" movies={popularMovies} />
       <MovieCarousel title="Top Rated" movies={topRatedMovies} />
     </div>

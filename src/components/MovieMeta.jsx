@@ -50,7 +50,7 @@ const MovieMeta = ({ movie }) => {
               >
                 Add to Watchlist
               </button>
-              <button className="rounded-lg px-4 py-2 border border-black hover:bg-black hover:text-white  cursor-pointer duration-300 ease-in-out transform transition-all">
+              <button className="rounded-lg px-4 py-2 border border-black hover:bg-black hover:text-white  cursor-pointer duration-300 ease-in-out transform transition-all dark:bg-blue-800 dark:hover:bg-blue-600">
                 Already Watched
               </button>
             </div>

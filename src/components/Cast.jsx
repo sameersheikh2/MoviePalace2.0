@@ -9,7 +9,7 @@ const Cast = ({ castInfo }) => {
         castInfo.slice(0, 15).map((cast) => (
           <div
             key={cast.id}
-            className="card w-[350px] h-[200px] card-side bg-white shadow-sm mb-4"
+            className="card w-[350px] h-[200px] card-side bg-white dark:bg-gray-800 shadow-sm mb-4"
           >
             <figure>
               <img

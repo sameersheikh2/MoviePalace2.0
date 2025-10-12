@@ -2,10 +2,41 @@
 @import "tw-animate-css";
 @plugin "daisyui";
 
+@plugin "tailwindcss-animate";
+
 @custom-variant dark (&:is(.dark *));
 body {
   font-family: "Poppins", serif;
-  background-color: #f1f1f1;
+  background-color: #f9fafb;
+  transition: background-color 0.3s ease;
+}
+
+.dark body {
+  background-color: #111827;
+}
+
+.now-playing-swiper {
+  overflow: hidden !important;
+  border-radius: 2rem !important;
+}
+
+.now-playing-swiper .swiper-wrapper {
+  border-radius: 2rem !important;
+}
+
+.now-playing-swiper .swiper-slide {
+  overflow: hidden !important;
+  border-radius: 2rem !important;
+}
+
+.now-playing-swiper .swiper-slide > div {
+  border-radius: 2rem !important;
+  overflow: hidden !important;
+}
+
+.now-playing-swiper .swiper-slide img {
+  border-radius: 2rem !important;
+  overflow: hidden !important;
 }
 
 @theme inline {

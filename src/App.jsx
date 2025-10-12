@@ -6,12 +6,15 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import MovieDetail from "./pages/MovieDetail";
 import CastDetail from "./components/CastDetail";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Header />
-      <Outlet />
+      <ThemeProvider>
+        <Header />
+        <Outlet />
+      </ThemeProvider>
     </Provider>
   );
 };

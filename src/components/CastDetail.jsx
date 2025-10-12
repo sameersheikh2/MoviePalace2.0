@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchCastInfo, setCastInfo } from "../store/slices/castSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ const CastDetail = () => {
   const castInfo = useSelector((state) => state.castInfo);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     if (castId) {
       dispatch(fetchCastInfo(castId));
     }
@@ -20,7 +21,11 @@ const CastDetail = () => {
   }, [castId, dispatch]);
 
   if (!castInfo) {
-    return <div className="text-center mt-10">Loading cast info…</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <progress className="progress w-56"></progress>
+      </div>
+    );
   }
   const {
     name,
@@ -32,22 +37,22 @@ const CastDetail = () => {
   } = castInfo;
 
   return (
-    <div className="mt-10 flex justify-center gap-5 flex-wrap items-center">
+    <div className="mt-10 pb-10 flex justify-center gap-5 flex-wrap items-center">
       <div className="mt-6 w-full max-w-4xl mx-auto">
         <button
-          className="text-base hover:bg-green-800 font-medium transition-all ease-in-out duration-300 rounded-md p-2 hover:text-white"
+          className="text-base cursor-pointer hover:bg-blue-600 font-medium transition-all ease-in-out duration-300 rounded-md p-2 hover:text-white dark:bg-blue-800 dark:hover:bg-blue-600"
           onClick={() => navigate(-1)}
         >
           Go back
         </button>
 
         <h1 className="text-6xl my-4 font-bold">{name ?? "No name"}</h1>
-        <p className="text-gray-600 font-semibold text-sm">
+        <p className="text-gray-600 font-semibold text-sm dark:text-white">
           {known_for_department ?? ""}
         </p>
 
         {birthday && (
-          <span className="text-gray-600 font-semibold text-sm block my-2">
+          <span className="text-gray-600 dark:text-white font-semibold text-sm block my-2">
             Birthday: {birthday}
           </span>
         )}
@@ -80,25 +85,30 @@ const CastDetail = () => {
           {movie_credits?.cast && movie_credits.cast.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {movie_credits.cast.map((movie) => (
-                <div key={movie.id} className="card bg-white shadow p-3">
-                  <img
-                    className="w-full h-48 object-cover"
-                    src={
-                      movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                        : "https://via.placeholder.com/300x450"
-                    }
-                    alt={movie.title || movie.name}
-                  />
-                  <div className="mt-2">
-                    <h2 className="font-semibold">
-                      {movie.title || movie.name}
-                    </h2>
-                    <p className="text-sm text-gray-600">
-                      as {movie.character}
-                    </p>
+                <Link to={"/movie/" + movie.id}>
+                  <div
+                    key={movie.id}
+                    className="card bg-white dark:bg-gray-800 shadow p-3"
+                  >
+                    <img
+                      className="w-full h-48 object-cover"
+                      src={
+                        movie.poster_path
+                          ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                          : "https://via.placeholder.com/300x450"
+                      }
+                      alt={movie.title || movie.name}
+                    />
+                    <div className="mt-2">
+                      <h2 className="font-semibold">
+                        {movie.title || movie.name}
+                      </h2>
+                      <p className="text-sm text-gray-600">
+                        as {movie.character}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           ) : (
