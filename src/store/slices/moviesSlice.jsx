@@ -126,6 +126,7 @@ export const fetchMoviesGenre = () => async (dispatch) => {
     const res = await fetch(movieGenreListLink, options);
     const data = await res.json();
     dispatch(setMoviesGenre(data));
+    console.log(data);
   } catch (error) {
     console.error(error);
   }

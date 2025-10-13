@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { pathname } = useLocation();
+  console.log(pathname);
 
   return (
     <div className="drawer z-50">
@@ -40,7 +41,7 @@ const Header = () => {
             </div>
           </div>
           <div className="w-full block lg:hidden px-1 mb-2">
-            <SearchBar />
+            {pathname !== "/login" && pathname !== "/signup" && <SearchBar />}
           </div>
           <div className="hidden lg:flex flex-1 flex-row  items-center ml-5 w-full h-20">
             <Link to="/" className="flex items-center">
@@ -54,7 +55,7 @@ const Header = () => {
               </div>
             </Link>
             <div className="w-full lg:w-[500px] lg:mx-10 mt-0 order-2 lg:order-none z-30">
-              <SearchBar />
+              {pathname !== "/login" && pathname !== "/signup" && <SearchBar />}
             </div>
             <div className="ml-auto flex items-center gap-2 w-full lg:w-auto justify-center lg:justify-end mt-0">
               <ul className="flex flex-row menu px-1 font-semibold items-center gap-2 w-full lg:w-auto">
