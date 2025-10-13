@@ -1,8 +1,9 @@
 import { movieImageLink } from "../utils/constant";
 import Cast from "./Cast";
+import MovieImagesCarousel from "./MovieImagesCarousel";
+import SimilarMoviesCarousel from "./SimilarMoviesCarousel";
 
 const MovieMeta = ({ movie }) => {
-  console.log(movie);
   if (!movie || movie === null) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -44,6 +45,20 @@ const MovieMeta = ({ movie }) => {
             ) : (
               <div className="skeleton h-20 bg-gray-200 w-48 rounded-3xl mb-10"></div>
             )}
+            {typeof movie.vote_average === "number" && (
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-yellow-500 text-xl md:text-2xl">★</span>
+                <span className="text-lg md:text-4xl font-semibold">
+                  {movie.vote_average.toFixed(1)}
+                </span>
+                <span className="text-gray-500 text-base md:text-lg">/ 10</span>
+                {movie.vote_count ? (
+                  <span className="text-gray-400 text-xs md:text-sm">
+                    ({movie.vote_count} votes)
+                  </span>
+                ) : null}
+              </div>
+            )}
             <div className="space-x-2 mb-4 ">
               <button
                 className={`rounded-lg bg-black text-white px-4 py-2 border border-black hover:bg-white hover:text-black  cursor-pointer duration-300 ease-in-out transform transition-all`}
@@ -83,11 +98,12 @@ const MovieMeta = ({ movie }) => {
         <h2 className="text-2xl font-bold mt-6 mb-2">Synopsis</h2>
         <p className="text-base sm:text-lg">{movie.overview}</p>
       </div>
-
+      <MovieImagesCarousel backdrops={movie.images?.backdrops} />
       <div className="mt-12">
         <h2 className="text-3xl font-bold text-center mb-6">Cast</h2>
         <Cast castInfo={movie.credits?.cast} />
       </div>
+      <SimilarMoviesCarousel movies={movie.similar?.results} />
     </div>
   );
 };

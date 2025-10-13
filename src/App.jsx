@@ -6,15 +6,14 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import MovieDetail from "./pages/MovieDetail";
 import CastDetail from "./pages/CastDetail";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <Header />
-        <Outlet />
-      </ThemeProvider>
+      <Header />
+      <Outlet />
     </Provider>
   );
 };
@@ -36,6 +35,14 @@ export const router = createBrowserRouter([
       {
         path: "/cast/:castId",
         element: <CastDetail />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },

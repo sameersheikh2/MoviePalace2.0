@@ -15,7 +15,6 @@ const MovieDetail = () => {
     dispatch(fetchMovieDetail(movieId));
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     return () => {
-      // dispatch({ type: "movies/setMovieDetails", payload: null });
       dispatch(setMovieDetails(null));
     };
   }, [movieId, dispatch]);

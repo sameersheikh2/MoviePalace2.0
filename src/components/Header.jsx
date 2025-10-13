@@ -1,7 +1,9 @@
-import { Link } from "react-router";
-import ThemeToggle from "./ThemeToggle";
+import { Link, useLocation } from "react-router";
+import { AnimatedThemeToggler } from "../../components/ui/animated-theme-toggler";
 
 const Header = () => {
+  const { pathname } = useLocation();
+
   return (
     <div className="drawer z-50">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -51,18 +53,27 @@ const Header = () => {
                     Home
                   </Link>
                 </li>
-                <li>
+                <li className={`${pathname == "/login" && "hidden"}`}>
                   <Link
                     to="/login"
                     className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-blue-600 hover:text-white transition-all duration-300 text-gray-700 dark:text-gray-300"
                   >
-                    Login
+                    Log In
+                  </Link>
+                </li>
+                <li
+                  className={`${
+                    pathname == "/signup" && "hidden"
+                  }  rounded-md hover:bg-blue-600 hover:text-white transition-all duration-300 text-gray-700 dark:text-gray-300`}
+                >
+                  <Link to="/signup" className="font-semibold">
+                    Sign Up
                   </Link>
                 </li>
               </ul>
 
               <div>
-                <ThemeToggle />
+                <AnimatedThemeToggler />
               </div>
             </div>
           </div>
@@ -77,13 +88,18 @@ const Header = () => {
         ></label>
         <ul className="menu flex justify-center items-center flex-col p-4 w-80 min-h-full dark:bg-base-200/90 text-4xl text-white bg-black/90 space-y-2">
           <li>
-            <Link to="/" className="font-semibold">
+            <Link to="/" className="font-semibold ">
               Home
             </Link>
           </li>
-          <li>
+          <li className={`${pathname == "/login" && "hidden"}`}>
             <Link to="/login" className="font-semibold">
-              Login
+              Log In
+            </Link>
+          </li>
+          <li className={`${pathname == "/signup" && "hidden"}`}>
+            <Link to="/signup" className="font-semibold">
+              Sign Up
             </Link>
           </li>
         </ul>
