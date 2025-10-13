@@ -4,13 +4,12 @@ import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
-    <div className="drawer z-50">
+    <header className="drawer z-50 ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
-        <div className="navbar bg-white dark:bg-gray-900 shadow-md px-4 flex-col lg:flex-row lg:h-20 w-full">
+        <div className="navbar md:py-[50px] bg-white dark:bg-gray-900 shadow-md px-4 flex-col lg:flex-row lg:h-20 w-full">
           <div className="flex items-center w-full justify-between lg:hidden gap-2 py-2">
             <label
               htmlFor="my-drawer-2"
@@ -35,6 +34,9 @@ const Header = () => {
               <h1 className="tracking-widest text-2xl font-semibold text-gray-900 dark:text-white">
                 MoviePalace
               </h1>
+              <p className="text-xs tracking-widest text-gray-600 dark:text-gray-300">
+                Where Every Frame Tells a Story
+              </p>
             </Link>
             <div className="flex items-center">
               <AnimatedThemeToggler />
@@ -121,7 +123,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </header>
   );
 };
 
