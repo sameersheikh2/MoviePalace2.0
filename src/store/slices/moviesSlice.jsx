@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   movieDetailLink,
+  movieGenreListLink,
   movieLinkNowPlaying,
   movieLinkPopular,
   movieLinkTopRated,
@@ -44,6 +45,7 @@ const moviesSlice = createSlice({
     topRatedMovies: [],
     searchResults: [],
     movieDetails: {},
+    genre: [],
     filters: {},
     loading: false,
     error: null,
@@ -54,6 +56,12 @@ const moviesSlice = createSlice({
     },
     setMovieDetails(state, action) {
       state.movieDetails = action.payload;
+    },
+    setMoviesGenre(state, action) {
+      state.genre = action.payload;
+    },
+    setSearchResults(state, action) {
+      state.searchResults = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -113,6 +121,16 @@ export const fetchMovieDetail = (movieId) => async (dispatch) => {
     console.error(error);
   }
 };
+export const fetchMoviesGenre = () => async (dispatch) => {
+  try {
+    const res = await fetch(movieGenreListLink, options);
+    const data = await res.json();
+    dispatch(setMoviesGenre(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-export const { setMovieDetails } = moviesSlice.actions;
+export const { setMovieDetails, setMoviesGenre, setSearchResults } =
+  moviesSlice.actions;
 export default moviesSlice.reducer;

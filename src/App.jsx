@@ -8,12 +8,14 @@ import MovieDetail from "./pages/MovieDetail";
 import CastDetail from "./pages/CastDetail";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <Provider store={store}>
       <Header />
       <Outlet />
+      <Footer />
     </Provider>
   );
 };

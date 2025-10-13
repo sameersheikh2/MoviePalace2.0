@@ -22,7 +22,7 @@ const MovieImagesCarousel = ({ backdrops }) => {
             <img
               src={movieImageLink + img.file_path}
               alt={`Screenshot ${idx + 1}`}
-              className="w-full h-[350px] md:h-full object-cover rounded-2xl"
+              className="w-full h-full object-cover rounded-2xl"
               style={{ borderRadius: "1.5rem", width: "100%" }}
             />
           </SwiperSlide>

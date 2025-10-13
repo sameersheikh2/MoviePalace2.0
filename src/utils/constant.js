@@ -26,3 +26,6 @@ export const movieDetailLink = "https://api.themoviedb.org/3/movie/";
 export const castImageLink = "https://image.tmdb.org/t/p/original/";
 
 export const castDetailLink = "https://api.themoviedb.org/3/person/";
+
+export const movieGenreListLink =
+  "https://api.themoviedb.org/3/genre/movie/list";
