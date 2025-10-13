@@ -30,7 +30,7 @@ function MoviesList() {
   if (error) return <div>Error!</div>;
 
   return (
-    <div className="pt-24 px-20 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
+    <div className="pt-24 md:px-20 px-6 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <NowPlayingCarousel movies={nowPlayingMovies} />
       <MovieCarousel title="Popular Movies" movies={popularMovies} />
       <MovieCarousel title="Top Rated" movies={topRatedMovies} />

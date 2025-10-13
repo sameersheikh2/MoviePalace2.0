@@ -20,7 +20,7 @@ const MovieCard = ({ movieData }) => {
           />
         </div>
         <div className="mx-3 mt-4 text-center">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+          <h2 className="md:text-2xl text-lg font-semibold text-gray-900 dark:text-white">
             {movieData?.title}
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-300">

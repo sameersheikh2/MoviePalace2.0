@@ -5,7 +5,7 @@ import { createBrowserRouter, Outlet } from "react-router";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import MovieDetail from "./pages/MovieDetail";
-import CastDetail from "./components/CastDetail";
+import CastDetail from "./pages/CastDetail";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 const App = () => {
