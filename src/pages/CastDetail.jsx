@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchCastInfo, setCastInfo } from "../store/slices/castSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CastDetailSkeleton from "../ui/CastDetailSkeleton";
 
 const CastDetail = () => {
   const { castId } = useParams();
@@ -11,21 +12,14 @@ const CastDetail = () => {
   const castInfo = useSelector((state) => state.castInfo);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    dispatch(setCastInfo(null));
     if (castId) {
       dispatch(fetchCastInfo(castId));
     }
-    return () => {
-      dispatch(setCastInfo(null));
-    };
   }, [castId, dispatch]);
 
   if (!castInfo) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <progress className="progress w-56"></progress>
-      </div>
-    );
+    return <CastDetailSkeleton />;
   }
   const {
     name,

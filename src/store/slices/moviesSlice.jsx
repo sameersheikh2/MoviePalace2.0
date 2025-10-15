@@ -39,7 +39,7 @@ const moviesSlice = createSlice({
     popularMovies: [],
     topRatedMovies: [],
     searchResults: [],
-    movieDetails: {},
+    movieDetails: null,
     genre: [],
     filters: {},
     loading: false,

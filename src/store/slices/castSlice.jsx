@@ -3,7 +3,7 @@ import { castDetailLink, options } from "../../utils/constant";
 
 const castSlice = createSlice({
   name: "castInfo",
-  initialState: [],
+  initialState: null,
   reducers: {
     setCastInfo(state, action) {
       return action.payload;

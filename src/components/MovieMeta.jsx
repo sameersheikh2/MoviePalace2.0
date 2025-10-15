@@ -2,14 +2,11 @@ import { movieImageLink } from "../utils/constant";
 import Cast from "./Cast";
 import MovieImagesCarousel from "./MovieImagesCarousel";
 import SimilarMoviesCarousel from "./SimilarMoviesCarousel";
+import MovieDetailSkeleton from "../ui/MovieDetailSkeleton";
 
-const MovieMeta = ({ movie }) => {
+const MovieMeta = ({ movie, navigate }) => {
   if (!movie || movie === null) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <progress className="progress w-56"></progress>
-      </div>
-    );
+    return <MovieDetailSkeleton />;
   }
 
   const posterUrl = movie.poster_path
@@ -23,6 +20,12 @@ const MovieMeta = ({ movie }) => {
 
   return (
     <div className="px-4 sm:px-8 md:px-20 py-8">
+      <button
+        className="text-base cursor-pointer hover:bg-blue-600 font-medium transition-all ease-in-out duration-300 rounded-md p-2 hover:text-white dark:bg-blue-800 dark:hover:bg-blue-600 mb-4"
+        onClick={() => navigate(-1)}
+      >
+        Go back
+      </button>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="w-full sm:w-80 md:w-96 aspect-[2/3] flex-shrink-0">
           {posterUrl ? (
