@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { Link } from "react-router";
 import { useRef } from "react";
 
@@ -58,10 +58,14 @@ const NowPlayingCarousel = ({ movies }) => {
 
         <Swiper
           ref={swiperRef}
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           spaceBetween={0}
           slidesPerView={1}
           centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           className="now-playing-swiper w-full"
           style={{ borderRadius: "2rem", overflow: "hidden" }}
         >

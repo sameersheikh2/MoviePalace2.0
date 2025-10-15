@@ -32,11 +32,6 @@ export const fetchTopRated = createMovieFetcher(
   movieLinkTopRated
 );
 
-// export const fetchMovieDetails = createMovieFetcher(
-//   "fetchMovieDetails",
-//   movieDetailLink
-// );
-
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
@@ -98,12 +93,6 @@ const moviesSlice = createSlice({
         state.topRatedMovies = action.payload;
       })
       .addCase(fetchTopRated.rejected, handleRejected);
-    // .addCase(fetchMovieDetails.pending, handlePending)
-    // .addCase(fetchMovieDetails.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.movieDetails = action.payload;
-    // })
-    // .addCase(fetchMovieDetails.rejected, handleRejected);
   },
 });
 
