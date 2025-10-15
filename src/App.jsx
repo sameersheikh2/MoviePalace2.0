@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 import { createBrowserRouter, Outlet, useLocation } from "react-router";
 import { Provider } from "react-redux";
 import store from "./store/store";
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <NotFound />,
     children: [
       { path: "/", element: <Home /> },
       {

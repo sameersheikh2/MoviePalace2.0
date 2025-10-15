@@ -62,12 +62,14 @@ const Header = () => {
             <div className="ml-auto flex items-center gap-2 w-full lg:w-auto justify-center lg:justify-end mt-0">
               <ul className="flex flex-row menu px-1 font-semibold items-center gap-2 w-full lg:w-auto">
                 <li className="w-full lg:w-auto">
-                  <Link
-                    to="/"
-                    className="w-full lg:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-blue-600 hover:text-white transition-all duration-300 text-gray-700 dark:text-gray-300 text-center"
-                  >
-                    Home
-                  </Link>
+                  {pathname !== "/" && (
+                    <Link
+                      to="/"
+                      className="w-full lg:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-blue-600 hover:text-white transition-all duration-300 text-gray-700 dark:text-gray-300 text-center"
+                    >
+                      Home
+                    </Link>
+                  )}
                 </li>
                 <li
                   className={`w-full lg:w-auto ${
@@ -106,11 +108,13 @@ const Header = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu flex justify-center items-center flex-col p-4 w-80 min-h-full dark:bg-base-200/90 text-4xl text-white bg-black/90 space-y-2">
-          <li>
-            <Link to="/" className="font-semibold ">
-              Home
-            </Link>
-          </li>
+          {pathname !== "/" && (
+            <li>
+              <Link to="/" className="font-semibold ">
+                Home
+              </Link>
+            </li>
+          )}
           <li className={`${pathname == "/login" && "hidden"}`}>
             <Link to="/login" className="font-semibold">
               Log In
