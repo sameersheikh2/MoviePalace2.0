@@ -85,6 +85,7 @@ src/
 │   └── Signup.jsx
 ├── store/           # Redux store and slices
 └── utils/           # Helper functions
+└── ui/           # ui components
 ```
 
 ## 🎯 Available Scripts
