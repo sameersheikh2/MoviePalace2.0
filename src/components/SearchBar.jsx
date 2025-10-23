@@ -53,21 +53,16 @@ const SearchBar = () => {
   const handleButtonSearch = () => {
     const q = query.trim();
     if (!q) return;
-    // Navigate to search page with query, reset page to 1
-    navigate(`/search?q=${encodeURIComponent(q)}&page=1`);
-    // Hide typeahead and clear suggestions (results will be handled by SearchResults page)
     setIsInputFocused(false);
     dispatch(setSearchResults([]));
   };
 
-  // Sync input with URL q param so term shows on Search page and when navigating back/forward
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const q = params.get("q") || "";
     setQuery(q);
   }, [location.search]);
 
-  // Manage focus/blur to show/hide dropdown with small delay
   const handleInputFocus = () => {
     if (blurTimeoutRef.current) clearTimeout(blurTimeoutRef.current);
     setIsInputFocused(true);
