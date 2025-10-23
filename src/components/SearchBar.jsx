@@ -1,17 +1,19 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
 import { movieImageLink, searchMovieLink, options } from "../utils/constant";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchResults } from "../store/slices/moviesSlice";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const [showResults, setShowResults] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef();
+  const blurTimeoutRef = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.movies.searchResults);
 
@@ -26,7 +28,6 @@ const SearchBar = () => {
       console.error("Something went wrong: " + err.message);
     }
     setLoading(false);
-    setShowResults(true);
   };
 
   const handleInput = (e) => {
@@ -35,7 +36,6 @@ const SearchBar = () => {
     clearTimeout(debounceRef.current);
     if (val.trim() === "") {
       dispatch(setSearchResults([]));
-      setShowResults(false);
       return;
     }
     debounceRef.current = setTimeout(() => {
@@ -44,14 +44,39 @@ const SearchBar = () => {
   };
 
   const handleSelect = (movie) => {
-    setShowResults(false);
+    setIsInputFocused(false);
     setQuery("");
     dispatch(setSearchResults([]));
     navigate(`/movie/${movie.id}`);
   };
 
   const handleButtonSearch = () => {
-    if (query.trim()) handleSearch(query);
+    const q = query.trim();
+    if (!q) return;
+    // Navigate to search page with query, reset page to 1
+    navigate(`/search?q=${encodeURIComponent(q)}&page=1`);
+    // Hide typeahead and clear suggestions (results will be handled by SearchResults page)
+    setIsInputFocused(false);
+    dispatch(setSearchResults([]));
+  };
+
+  // Sync input with URL q param so term shows on Search page and when navigating back/forward
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get("q") || "";
+    setQuery(q);
+  }, [location.search]);
+
+  // Manage focus/blur to show/hide dropdown with small delay
+  const handleInputFocus = () => {
+    if (blurTimeoutRef.current) clearTimeout(blurTimeoutRef.current);
+    setIsInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    blurTimeoutRef.current = setTimeout(() => {
+      setIsInputFocused(false);
+    }, 300);
   };
 
   return (
@@ -60,6 +85,8 @@ const SearchBar = () => {
         <Input
           value={query}
           onChange={handleInput}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           placeholder="Search movies..."
           className="rounded-lg px-4 py-2 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
@@ -67,7 +94,7 @@ const SearchBar = () => {
           Search
         </Button>
       </div>
-      {showResults && searchResults.length > 0 && (
+      {isInputFocused && searchResults.length > 0 && (
         <div className="absolute left-0 right-0 mt-2 bg-white dark:bg-gray-900 shadow-lg rounded-lg z-50 max-h-72 overflow-auto">
           {loading ? (
             <div className="p-4 text-center">Loading...</div>
