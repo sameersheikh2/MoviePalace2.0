@@ -12,7 +12,7 @@ import Signup from "./pages/Signup";
 import Footer from "./components/Footer";
 import { AnimatePresence } from "motion/react";
 import PageTransition from "./components/PageTransition";
-import SearchResults from "./pages/SearchResults";
+import Discover from "./pages/Discover";
 
 const App = () => {
   const location = useLocation();
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/search", element: <SearchResults /> },
+      { path: "/discover/:type", element: <Discover /> },
       {
         path: "/about",
         element: <About />,

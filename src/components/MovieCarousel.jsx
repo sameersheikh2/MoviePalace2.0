@@ -1,11 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import MovieCard from "./MovieCard";
+import { Link } from "react-router";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-const MovieCarousel = ({ title, movies }) => {
+const MovieCarousel = ({ title, movies, typeKey }) => {
   if (!movies || movies.length === 0) return null;
   return (
     <div className="mb-16 w-full">
@@ -13,9 +14,13 @@ const MovieCarousel = ({ title, movies }) => {
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
           {title}
         </h2>
-        <button className="btn btn-sm btn-outline border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white">
-          View All
-        </button>
+        {typeKey ? (
+          <Link to={`/discover/${typeKey}`}>
+            <button className="btn btn-sm btn-outline border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white">
+              View All
+            </button>
+          </Link>
+        ) : null}
       </div>
       <div className="divider bg-gray-300 dark:bg-gray-600 h-[1px]"></div>
       <Swiper
