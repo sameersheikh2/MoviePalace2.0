@@ -32,8 +32,8 @@ function MoviesList() {
   return (
     <div className="pt-24 md:px-20 px-6 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <NowPlayingCarousel movies={nowPlayingMovies} />
-      <MovieCarousel title="Popular Movies" movies={popularMovies} />
-      <MovieCarousel title="Top Rated" movies={topRatedMovies} />
+      <MovieCarousel title="Popular Movies" movies={popularMovies} typeKey="popular" />
+      <MovieCarousel title="Top Rated" movies={topRatedMovies} typeKey="top_rated" />
     </div>
   );
 }
