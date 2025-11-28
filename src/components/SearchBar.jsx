@@ -53,6 +53,7 @@ const SearchBar = () => {
   const handleButtonSearch = () => {
     const q = query.trim();
     if (!q) return;
+    navigate(`/search?q=${encodeURIComponent(q)}&page=1`);
     setIsInputFocused(false);
     dispatch(setSearchResults([]));
   };
